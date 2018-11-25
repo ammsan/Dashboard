@@ -1,0 +1,5 @@
+com\infodashboard\associate\associaterecords.class
+com\infodashboard\associate\MainController.class
+com\infodashboard\associate\AssociatesDAO.class
+com\infodashboard\associate\UsersRepository.class
+com\infodashboard\associate\AssociateApplication.class
