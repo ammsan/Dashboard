@@ -53,17 +53,15 @@ public class MainController {
 	@PutMapping("update/{id}")
 	public ResponseEntity<Object> update(@RequestBody AssociateRecords emp,
 			@PathVariable Long id) {
-
-		Optional<AssociateRecords> empOptional = usersRepository.findById(id);
-
-		if (!empOptional.isPresent())
-			return ResponseEntity.notFound().build();
-
-		emp.setId(id);
-
-		usersRepository.save(emp);
-
-		return ResponseEntity.noContent().build();
+		try {
+			Optional<AssociateRecords> empOptional = usersRepository.findById(id);
+			if (!empOptional.isPresent())
+				return ResponseEntity.notFound().build();
+			emp.setId(id);
+			usersRepository.save(emp);
+		 } catch (SQLException e) {
+			System.out.printl(getErrorCode(e));
+			}
 	}
 	
 }
