@@ -70,11 +70,13 @@ public class MainController {
 	public ResponseEntity<Object> update(@RequestBody AssociateRecords emp,
 			@PathVariable Long id) {
 		try {
-			Optional<AssociateRecords> empOptional = usersRepository.findById(id);
-			if (!empOptional.isPresent())
-				return ResponseEntity.notFound().build();
-			emp.setId(id);
-			usersRepository.save(emp);
+			if (id != null && emp != null) {
+				Optional<AssociateRecords> empOptional = usersRepository.findById(id);
+				if (!empOptional.isPresent())
+					return ResponseEntity.notFound().build();
+				emp.setId(id);
+				usersRepository.save(emp);
+			}
 		 } catch (SQLException e) {
 			e.printStackTrace();
 		 }
