@@ -32,15 +32,24 @@ public class MainController {
 
 	@GetMapping("/viewall")
 	public List<AssociateRecords> viewall() {
-		return usersRepository.findAll();
+		ArrayList<AssociateRecords> arList = new ArrayList<AssociateRecords>();
+		try {
+			arList = usersRepository.findAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return arList;
 	}
 
 	@GetMapping("/view/{id}")
-	public Optional<AssociateRecords> view(@PathVariable Long id)
-
-	{
-
-		return usersRepository.findById(id);
+	public Optional<AssociateRecords> view(@PathVariable Long id) {
+		AssociateRecords ar = new AssociateRecords();
+		try {
+		     ar = usersRepository.findById(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		 }
+		return ar;
 
 	}
 
