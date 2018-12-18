@@ -60,7 +60,7 @@ public class MainController {
 			emp.setId(id);
 			usersRepository.save(emp);
 		 } catch (SQLException e) {
-			System.out.println(getErrorCode(e));
+			e.printStackTrace();
 		 }
 	}
 	
