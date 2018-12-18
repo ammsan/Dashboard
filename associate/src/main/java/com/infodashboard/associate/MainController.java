@@ -55,8 +55,15 @@ public class MainController {
 
 	@DeleteMapping("delete/{id}")
 	public boolean delete(@PathVariable Long id) {
-		usersRepository.deleteById(id);
-		return true;
+		boolean isDeleted = false;
+		try {
+		     if (id != null) {
+		     	isDeleted = usersRepository.findById(id);
+		     }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		 }
+		return isDeleted;
 	}
 
 	@PutMapping("update/{id}")
