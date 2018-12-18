@@ -61,7 +61,7 @@ public class MainController {
 			usersRepository.save(emp);
 		 } catch (SQLException e) {
 			System.out.printl(getErrorCode(e));
-			}
+		 }
 	}
 	
 }
