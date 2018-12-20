@@ -43,13 +43,14 @@ public class MainController {
 
 	@GetMapping("/view/{id}")
 	public Optional<AssociateRecords> view(@PathVariable Long id) {
-		AssociateRecords ar = new AssociateRecords();
-		try {
-		     ar = usersRepository.findById(id);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		 }
-		return ar;
+		Optional<AssociateRecords> ar = usersRepository.findById(id);
+		
+	        if (!ar.isPresent())
+			throw new AssociateNotFoundException("id-" + id);
+		
+		Optional<AssociateRecords> associate = new AssociateRecords(ar.get());
+		
+		return associate;
 
 	}
 
