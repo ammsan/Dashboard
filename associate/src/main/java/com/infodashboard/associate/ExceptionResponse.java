@@ -1,4 +1,4 @@
-package com.infodashboard.Associate;
+package com.infodashboard.associate;
 
 import java.util.Date;
 
