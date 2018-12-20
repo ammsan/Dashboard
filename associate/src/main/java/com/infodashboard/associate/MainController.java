@@ -33,11 +33,12 @@ public class MainController {
 	@GetMapping("/viewall")
 	public List<AssociateRecords> viewall() {
 		ArrayList<AssociateRecords> arList = new ArrayList<AssociateRecords>();
-		try {
-			arList = usersRepository.findAll();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+
+	        arList = usersRepository.findAll();
+		
+		if (ar == null || ar.isEmpty())
+			throw new AssociateNotFoundException("id-" + ar);
+		
 		return arList;
 	}
 
