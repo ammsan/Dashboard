@@ -1,3 +1,5 @@
+package com.infodashboard.associate;
+
 import java.util.Date;
 
 import org.springframework.http.HttpHeaders;
