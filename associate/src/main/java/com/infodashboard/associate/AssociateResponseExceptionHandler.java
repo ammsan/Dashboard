@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseExceptionHandler;
+import com.infodashboard.associate.AssociateNotFoundException;
 
 @ControllerAdvice
 @RestController
-public class AssciateResponseExceptionHandler extends ResponseExceptionHandler {
+public class AssociateResponseExceptionHandler extends ResponseExceptionHandler {
 
   @ExceptionHandler(Exception.class)
   public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
@@ -23,8 +24,8 @@ public class AssciateResponseExceptionHandler extends ResponseExceptionHandler {
     return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
-  @ExceptionHandler(StudentNotFoundException.class)
-  public final ResponseEntity<Object> handleUserNotFoundException(StudentNotFoundException ex, WebRequest request) {
+  @ExceptionHandler(AssociateNotFoundException.class)
+  public final ResponseEntity<Object> handleUserNotFoundException(AssociateNotFoundException ex, WebRequest request) {
     ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),
         request.getDescription(false));
     return new ResponseEntity(exceptionResponse, HttpStatus.NOT_FOUND);
