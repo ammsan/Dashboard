@@ -58,30 +58,28 @@ public class MainController {
 	@DeleteMapping("delete/{id}")
 	public boolean delete(@PathVariable Long id) {
 		boolean isDeleted = false;
-		try {
-		     if (id != null) {
-		     	isDeleted = usersRepository.findById(id);
-		     }
-		} catch (SQLException e) {
-			e.printStackTrace();
-		 }
+		
+		if (id != null) {
+			isDeleted = usersRepository.findById(id);
+		}
+		if (!isDeleted) {
+			throw new AssociateNotFoundException("id-" + id);
+		}
+		
 		return isDeleted;
 	}
 
 	@PutMapping("update/{id}")
 	public ResponseEntity<Object> update(@RequestBody AssociateRecords emp,
 			@PathVariable Long id) {
-		try {
-			if (id != null && emp != null) {
-				Optional<AssociateRecords> empOptional = usersRepository.findById(id);
-				if (!empOptional.isPresent())
-					return ResponseEntity.notFound().build();
-				emp.setId(id);
-				usersRepository.save(emp);
-			}
-		 } catch (SQLException e) {
-			e.printStackTrace();
-		 }
+
+		if (id != null && emp != null) {
+			Optional<AssociateRecords> empOptional = usersRepository.findById(id);
+			if (!empOptional.isPresent())
+				return ResponseEntity.notFound().build();
+			emp.setId(id);
+			usersRepository.save(emp);
+		}
 	}
 	
 }
